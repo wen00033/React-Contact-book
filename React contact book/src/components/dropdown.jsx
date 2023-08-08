@@ -4,6 +4,7 @@ import { updateDoc, doc } from "firebase/firestore";
 import db from "../db";
 import { useParams } from "react-router-dom";
 import { useState } from "react";
+import { includes } from "lodash";
 
 function Dropdown() {
   let [isOpen, setIsOpen] = useState(false);
@@ -24,7 +25,14 @@ function Dropdown() {
   }
   function updateHandler(e) {
     e.preventDefault();
-    updateDoc(doc(db, "contact", params.id), contact).then(() => navigate("/"));
+    if (includes(contact, "") !== true) {
+      updateDoc(doc(db, "contact", params.id), contact).then(() =>
+        navigate("/")
+      );
+    }
+    if (includes(contact, "") === true) {
+      alert("Please fill all the form and submit 🙌");
+    }
   }
 
   function changeHandler(e) {
