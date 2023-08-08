@@ -1,5 +1,5 @@
 import { useState } from "react";
-// import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { collection, addDoc } from "firebase/firestore";
 import db from "../db";
 import { Switch } from "@headlessui/react";
@@ -10,9 +10,11 @@ function classNames(...classes) {
 }
 
 export default function Newcontact() {
+  const navigate = useNavigate();
+
   const [contact, setContact] = useState({
     Message: "",
-    image: "https://placebear.com/640/360",
+    image: "https://i.pravatar.cc/1000/?img=15",
     phone: "",
     first_name: "",
     last_name: "",
@@ -27,9 +29,7 @@ export default function Newcontact() {
   function submitHandler(e) {
     if (includes(contact, "") !== true) {
       const c = collection(db, "contact");
-      addDoc(c, contact).then((doc) =>
-        console.log(`document:${doc.id} added to firestore`)
-      );
+      addDoc(c, contact).then(navigate("/mycontact"));
     }
     if (includes(contact, "") === true) {
       alert("Please fill all the form and submit 🙌");

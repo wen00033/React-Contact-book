@@ -31,13 +31,10 @@ function Contact() {
     });
   }, []);
 
-  console.log(contact);
-
   function delectHandler() {
     deleteDoc(doc(db, "contact", params.id)).then(() => navigate("/mycontact"));
   }
 
-  console.log(contact);
   return (
     <div className="bg-teal-100">
       <div className="pt-6 flex flex-col ">
