@@ -5,6 +5,8 @@ import "./index.css";
 import Newcontact from "./routes/newContact.jsx";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import MyContact from "./routes/Mycontact.jsx";
+import Contact from "./routes/Contact.jsx";
+import Random from "./routes/Random.jsx";
 
 const router = createBrowserRouter([
   {
@@ -18,6 +20,14 @@ const router = createBrowserRouter([
       {
         path: "/newContact",
         element: <Newcontact />,
+      },
+      {
+        path: "/mycontact/:id",
+        element: <Contact />,
+      },
+      {
+        path: "/random",
+        element: <Random />,
       },
     ],
   },
