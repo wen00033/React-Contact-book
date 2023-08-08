@@ -12,7 +12,6 @@ function Dropdown() {
   const navigate = useNavigate();
   const [contact, setContact] = useState({
     Message: "",
-    image: "https://i.pravatar.cc/300",
     phone: "",
     first_name: "",
     last_name: "",
@@ -27,7 +26,7 @@ function Dropdown() {
     e.preventDefault();
     if (includes(contact, "") !== true) {
       updateDoc(doc(db, "contact", params.id), contact).then(() =>
-        navigate("/")
+        navigate("/mycontact")
       );
     }
     if (includes(contact, "") === true) {

@@ -7,6 +7,7 @@ import db from "../db";
 function Random() {
   const [contact, setContact] = useState({});
   const navigate = useNavigate();
+
   useEffect(() => {
     axios.get("https://randomuser.me/api").then((res) =>
       setContact({
