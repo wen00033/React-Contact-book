@@ -5,31 +5,49 @@ import db from "../db";
 
 function myContact() {
   const [contact, setContact] = useState([]);
-
-  useEffect(() => {
-    const dataCollection = collection(db, "contact");
-    const dataQuery = query(dataCollection, orderBy("first_name"));
-    const dataSnapshot = onSnapshot(dataQuery, (snapshot) => {
-      const data = [];
-      snapshot.forEach((el) =>
-        data.push({
-          id: el.id,
-          message: el.data().Message,
-          image: el.data().image,
-          phone: el.data().phone,
-          firstName: el.data().first_name,
-          lastName: el.data().last_name,
-          email: el.data().email,
-          age: el.data().age,
-        })
+  const [search, setSearch] = useState("");
+  // useEffect(() => {
+  const dataCollection = collection(db, "contact");
+  const dataQuery = query(dataCollection, orderBy("first_name"));
+  const dataSnapshot = onSnapshot(dataQuery, (snapshot) => {
+    const data = [];
+    snapshot.forEach((el) =>
+      data.push({
+        id: el.id,
+        message: el.data().Message,
+        image: el.data().image,
+        phone: el.data().phone,
+        firstName: el.data().first_name,
+        lastName: el.data().last_name,
+        email: el.data().email,
+        age: el.data().age,
+      })
+    );
+    const searchItems = function (search, data) {
+      if (!search) {
+        return data;
+      }
+      return data.filter((person) =>
+        person.firstName.toLowerCase().includes(search)
       );
-      setContact(data);
-    });
-  }, []);
+    };
+    const filterItems = searchItems(search, data);
+    setContact(filterItems);
+    // setContact(filterItems);
+  });
 
   return (
     <div className=" bg-teal-100 px-5 pt-2 h-screen">
       <ul role="list" className="divide-y divide-gray-100">
+        <div className="mt-2.5">
+          <input
+            onChange={(e) => setSearch(e.target.value)}
+            type="text"
+            name="first_name"
+            id="first_name"
+            className="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+          />
+        </div>
         {contact.map((person) => (
           <Link key={person.id} to={"/mycontact/" + person.id}>
             <li className=" hover:bg-teal-200 transition-all ease-in px-4 rounded-lg  flex justify-between py-2">

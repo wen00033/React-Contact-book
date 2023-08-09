@@ -76,7 +76,7 @@ function Dropdown() {
                 <input
                   onChange={changeHandler}
                   className="my-1"
-                  placeholder="sdfsdf@gmail.com"
+                  placeholder="address@gmail.com"
                   name="email"
                   type="text"
                 />
@@ -86,7 +86,7 @@ function Dropdown() {
                 <input
                   onChange={changeHandler}
                   className="my-1"
-                  placeholder="454554121"
+                  placeholder="1231231231"
                   name="phone"
                   type="number"
                 />
@@ -106,7 +106,7 @@ function Dropdown() {
                 <input
                   onChange={changeHandler}
                   className="my-1"
-                  placeholder="Hello"
+                  placeholder="Tell me somthing..."
                   name="Message"
                   type="text"
                 />
